@@ -1,6 +1,9 @@
+import { useState } from "react";
+
 import { useMultipleStore } from "../../stores/MultipleStore";
 
 export function MultipleCounters() {
+  const [initialCount, setInitialCount] = useState(0);
   const {
     counters,
     updateLabel,
@@ -15,7 +18,11 @@ export function MultipleCounters() {
 
   return (
     <div className={`${theme}`}>
-      <button onClick={addCounter}>Add counter</button>
+      <input
+        value={initialCount}
+        onChange={(e) => setInitialCount(Number(e.target.value))}
+      />
+      <button onClick={() => addCounter(initialCount)}>Add counter</button>
       {counters.map((counter, index) => (
         <div key={index}>
           <input
