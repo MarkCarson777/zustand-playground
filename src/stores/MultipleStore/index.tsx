@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 type MultipleStore = {
   theme: "light" | "dark";
   toggleTheme: () => void;
-  counters: { id: number; count: number }[];
+  counters: { id: number; count: number; label: string }[];
   updateLabel: (id: number, label: string) => void;
   addCounter: () => void;
   removeCounter: (id: number) => void;
@@ -34,7 +34,10 @@ export const useMultipleStore = create<MultipleStore>()(
             0
           );
           return {
-            counters: [...state.counters, { id: maxId + 1, count: 0 }],
+            counters: [
+              ...state.counters,
+              { id: maxId + 1, count: 0, label: `Counter ${maxId + 1}` },
+            ],
           };
         }),
       removeCounter: (id) =>

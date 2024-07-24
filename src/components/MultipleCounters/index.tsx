@@ -3,6 +3,7 @@ import { useMultipleStore } from "../../stores/MultipleStore";
 export function MultipleCounters() {
   const {
     counters,
+    updateLabel,
     addCounter,
     removeCounter,
     increase,
@@ -16,8 +17,10 @@ export function MultipleCounters() {
     <div className={`${theme}`}>
       <button onClick={addCounter}>Add counter</button>
       {counters.map((counter) => (
-        <div key={counter.id}>
-          <h1>{counter.count}</h1>
+        <div>
+          <h1>
+            {counter.label}: {counter.count}
+          </h1>
           <button onClick={() => increase(counter.id)}>Increase</button>
           <button onClick={() => decrease(counter.id)}>Decrease</button>
           <button onClick={() => reset(counter.id)}>Reset</button>
