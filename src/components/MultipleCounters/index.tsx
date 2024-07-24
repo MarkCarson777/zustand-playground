@@ -18,6 +18,10 @@ export function MultipleCounters() {
       <button onClick={addCounter}>Add counter</button>
       {counters.map((counter) => (
         <div>
+          <input
+            value={counter.label}
+            onChange={(e) => updateLabel(counter.id, e.target.value)}
+          />
           <h1>
             {counter.label}: {counter.count}
           </h1>
