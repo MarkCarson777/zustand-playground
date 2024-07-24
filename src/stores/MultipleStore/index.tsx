@@ -27,7 +27,7 @@ export const useMultipleStore = create<MultipleStore>()(
           ),
         }));
       },
-      addCounter: () =>
+      addCounter: (initialCount = 0) =>
         set((state) => {
           const maxId = state.counters.reduce(
             (max, counter) => Math.max(max, counter.id),
@@ -36,7 +36,11 @@ export const useMultipleStore = create<MultipleStore>()(
           return {
             counters: [
               ...state.counters,
-              { id: maxId + 1, count: 0, label: `Counter ${maxId + 1}` },
+              {
+                id: maxId + 1,
+                count: initialCount,
+                label: `Counter ${maxId + 1}`,
+              },
             ],
           };
         }),
