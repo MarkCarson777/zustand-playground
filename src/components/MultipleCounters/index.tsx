@@ -16,8 +16,8 @@ export function MultipleCounters() {
   return (
     <div className={`${theme}`}>
       <button onClick={addCounter}>Add counter</button>
-      {counters.map((counter) => (
-        <div>
+      {counters.map((counter, index) => (
+        <div key={index}>
           <input
             value={counter.label}
             onChange={(e) => updateLabel(counter.id, e.target.value)}
