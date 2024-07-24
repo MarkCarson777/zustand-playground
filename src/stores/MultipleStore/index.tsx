@@ -5,6 +5,7 @@ type MultipleStore = {
   theme: "light" | "dark";
   toggleTheme: () => void;
   counters: { id: number; count: number }[];
+  updateLabel: (id: number, label: string) => void;
   addCounter: () => void;
   removeCounter: (id: number) => void;
   increase: (id: number) => void;
@@ -18,7 +19,14 @@ export const useMultipleStore = create<MultipleStore>()(
       theme: "light",
       toggleTheme: () =>
         set((state) => ({ theme: state.theme === "light" ? "dark" : "light" })),
-      counters: [{ id: 1, count: 0 }],
+      counters: [{ id: 1, count: 0, label: "Counter 1" }],
+      updateLabel: (id, label) => {
+        set((state) => ({
+          counters: state.counters.map((counter) =>
+            counter.id === id ? { ...counter, label } : counter
+          ),
+        }));
+      },
       addCounter: () =>
         set((state) => {
           const maxId = state.counters.reduce(
